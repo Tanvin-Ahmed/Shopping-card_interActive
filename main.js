@@ -5,8 +5,9 @@ var addPrice = 1;
 function priceIncreasing(priceID, addNumber) {
     const price = document.getElementById(priceID).innerText;
     const priceNumber = parseFloat(price);
-    // add price
+    // when device selected more than 1
     if (addNumber > 1) {
+        // add price
         addPrice = (priceNumber / (addNumber - 1)) * addNumber;
         document.getElementById(priceID).innerText = addPrice;
 
@@ -41,6 +42,7 @@ function priceIncreasing(priceID, addNumber) {
         totalAmount('subTotal');
         totalAmount('total');
     }
+    // when device select only 1
     else if (addNumber == 1) {
         if (priceID == 'iphonePrice') {
             // price
@@ -73,7 +75,7 @@ function priceIncreasing(priceID, addNumber) {
 function priceDecreasing(priceID, addNumber) {
     const price = document.getElementById(priceID).innerText;
     const priceNumber = parseFloat(price);
-
+    // when minimum 1 device selected 
     if (addNumber >= 1) {
         // decrease price
         addPrice = priceNumber - (priceNumber / (addNumber + 1));
@@ -106,6 +108,7 @@ function priceDecreasing(priceID, addNumber) {
         totalAmount('subTotal');
         totalAmount('total');
     }
+    // when selected device is 0
     else if (addNumber == 0) {
         // for phone
         if (priceID == 'iphonePrice') {
