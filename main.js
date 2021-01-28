@@ -6,41 +6,66 @@ function priceIncreasing(priceID, addNumber) {
     const price = document.getElementById(priceID).innerText;
     const priceNumber = parseFloat(price);
     // add price
-    addPrice = (priceNumber / (addNumber - 1)) * addNumber;
-    document.getElementById(priceID).innerText = addPrice;
+    if (addNumber > 1) {
+        addPrice = (priceNumber / (addNumber - 1)) * addNumber;
+        document.getElementById(priceID).innerText = addPrice;
 
 
-    // tax increasing
-    const addTax = document.getElementById('tax').innerText;
-    const taxNumber = parseFloat(addTax);
-    const tax = (10 * (addPrice / addNumber)) / 100;
-    var taxAmount = taxNumber + tax;
-    document.getElementById('tax').innerText = taxAmount.toFixed(2);
+        // tax increasing
+        const addTax = document.getElementById('tax').innerText;
+        const taxNumber = parseFloat(addTax);
+        const tax = (10 * (addPrice / addNumber)) / 100;
+        var taxAmount = taxNumber + tax;
+        document.getElementById('tax').innerText = taxAmount.toFixed(2);
 
 
-    // subtotal and total and tax Increasing
-    function totalAmount(totalID) {
-        const addTotal = document.getElementById(totalID).innerText;
-        const totalNumber = parseFloat(addTotal);
+        // subtotal and total and tax Increasing
+        function totalAmount(totalID) {
+            const addTotal = document.getElementById(totalID).innerText;
+            const totalNumber = parseFloat(addTotal);
 
-        // add total price
-        if (totalID === 'total') {
-            // add
-            var addTotalPrice = totalNumber + tax + (addPrice / addNumber);
-            console.log(addTotalPrice, tax, (addPrice / addNumber), totalNumber);
-            document.getElementById(totalID).innerText = addTotalPrice.toFixed(2);
+            // add total price
+            if (totalID === 'total') {
+                // add
+                var addTotalPrice = totalNumber + tax + (addPrice / addNumber);
+                console.log(addTotalPrice, tax, (addPrice / addNumber), totalNumber);
+                document.getElementById(totalID).innerText = addTotalPrice.toFixed(2);
+            }
+
+            // add subtotal price
+            else {
+                var addTotalPrice = totalNumber + (addPrice / addNumber);
+                document.getElementById(totalID).innerText = addTotalPrice;
+            }
         }
-
-        // add subtotal price
+        totalAmount('subTotal');
+        totalAmount('total');
+    }
+    else if (addNumber == 1) {
+        if (priceID == 'iphonePrice') {
+            // price
+            document.getElementById(priceID).innerText = 1219;
+            // tax
+            const tax = (10 * 1219) / 100;
+            document.getElementById('tax').innerText = tax.toFixed(2);
+            // subTotal
+            document.getElementById('subTotal').innerText = 1219;
+            // total
+            document.getElementById('total').innerText = 1219 + tax;
+        }
         else {
-            var addTotalPrice = totalNumber + (addPrice / addNumber);
-            document.getElementById(totalID).innerText = addTotalPrice;
+            // for case
+            document.getElementById(priceID).innerText = 59;
+            // tax
+            const Tax = (10 * 59) / 100;
+            document.getElementById('tax').innerText = Tax.toFixed(2);
+            // subTotal
+            document.getElementById('subTotal').innerText = 59;
+            // total
+            document.getElementById('total').innerText = 59 + Tax;
         }
     }
-    totalAmount('subTotal');
-    totalAmount('total');
 }
-
 
 
 //////////////////////DECREASING//////////////////////
@@ -48,46 +73,67 @@ function priceIncreasing(priceID, addNumber) {
 function priceDecreasing(priceID, addNumber) {
     const price = document.getElementById(priceID).innerText;
     const priceNumber = parseFloat(price);
-    // decrease price
-    addPrice = priceNumber - (priceNumber / (addNumber + 1));
-    document.getElementById(priceID).innerText = addPrice;
+
+    if (addNumber >= 1) {
+        // decrease price
+        addPrice = priceNumber - (priceNumber / (addNumber + 1));
+        document.getElementById(priceID).innerText = addPrice;
+        // tax decreasing
+        const totalTax = document.getElementById('tax').innerText;
+        const taxNumber = parseFloat(totalTax);
+        const tax = (10 * (addPrice / addNumber)) / 100;
+        var taxAmount = taxNumber - tax;
+        document.getElementById('tax').innerText = taxAmount.toFixed(2);
 
 
-    // tax decreasing
-    const addTax = document.getElementById('tax').innerText;
-    const taxNumber = parseFloat(addTax);
-    const tax = (10 * (addPrice / addNumber)) / 100;
-    var taxAmount = taxNumber - tax;
-    document.getElementById('tax').innerText = taxAmount.toFixed(2);
-
-
-    // subtotal and total Decreasing
-    function totalAmount(totalID) {
-        const addTotal = document.getElementById(totalID).innerText;
-        const totalNumber = parseFloat(addTotal);
-
-        // total price
-        if (totalID === 'total') {
-            // add
-            let decreaseTotalPrice = totalNumber - ((addPrice / addNumber));
-            decreaseTotalPrice -= tax;
-            document.getElementById(totalID).innerText = decreaseTotalPrice.toFixed(2);
+        // subtotal and total Decreasing
+        function totalAmount(totalID) {
+            const total = document.getElementById(totalID).innerText;
+            const totalNumber = parseFloat(total);
+            // total price
+            if (totalID === 'total') {
+                // add
+                let decreaseTotalPrice = totalNumber - ((addPrice / addNumber));
+                decreaseTotalPrice -= tax;
+                document.getElementById(totalID).innerText = decreaseTotalPrice.toFixed(2);
+            }
+            // sub subtotal price
+            else {
+                const decreasingTotalPrice = totalNumber - (addPrice / addNumber);
+                document.getElementById(totalID).innerText = decreasingTotalPrice;
+            }
         }
-
-        // sub subtotal price
+        totalAmount('subTotal');
+        totalAmount('total');
+    }
+    else if (addNumber == 0) {
+        // for phone
+        if (priceID == 'iphonePrice') {
+            document.getElementById(priceID).innerText = 0;
+            // tax
+            document.getElementById('tax').innerText = 0;
+            // subTotal
+            document.getElementById('subTotal').innerText = 0;
+            // total
+            document.getElementById('total').innerText = 0;
+        }
         else {
-            var addTotalPrice = totalNumber - (addPrice / addNumber);
-            document.getElementById(totalID).innerText = addTotalPrice;
+            // for case
+            document.getElementById(priceID).innerText = 0;
+            // tax
+            document.getElementById('tax').innerText = 0;
+            // subTotal
+            document.getElementById('subTotal').innerText = 0;
+            // total
+            document.getElementById('total').innerText = 0;
         }
     }
-    totalAmount('subTotal');
-    totalAmount('total');
 }
 
 
 /////////////////////////MAIN FUNCTION////////////////////
 // for plus and mins button
-function addOrSub(idButton, idDevice, priceID, totalID) {
+function addOrSub(idButton, idDevice, priceID) {
     // catch buttons
     const button = document.getElementById(idButton);
     button.addEventListener('click', function () {
@@ -99,16 +145,16 @@ function addOrSub(idButton, idDevice, priceID, totalID) {
             document.getElementById(idDevice).value = addNumber;
 
             // invoking price Increasing function
-            priceIncreasing(priceID, addNumber, totalID);
+            priceIncreasing(priceID, addNumber);
         }
         // for minus button
         else {
             var addNumber = valueNumber - 1;
-            if (addNumber >= 1) {
+            if (addNumber >= 0) {
                 document.getElementById(idDevice).value = addNumber;
 
                 // invoking price Decreasing function
-                priceDecreasing(priceID, addNumber, totalID);
+                priceDecreasing(priceID, addNumber);
             }
         }
     })
