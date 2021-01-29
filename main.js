@@ -6,7 +6,7 @@ function priceIncreasing(priceID) {
     } else {
         price = 59;
     }
-    let addPrice = 0,taxAmount = 0, subTotal = 0;
+    let addPrice = 0,taxAmount = 0;
     const catchPrice = document.getElementById(priceID).innerText;
     const catchPriceNumber = parseFloat(catchPrice);
     addPrice = catchPriceNumber + price;
