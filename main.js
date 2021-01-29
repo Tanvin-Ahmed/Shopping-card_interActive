@@ -7,6 +7,7 @@ function priceIncreasing(priceID) {
         price = 59;
     }
     let addPrice = 0,taxAmount = 0;
+    // Catch Price and upgrade Price Status
     const catchPrice = document.getElementById(priceID).innerText;
     const catchPriceNumber = parseFloat(catchPrice);
     addPrice = catchPriceNumber + price;
@@ -17,19 +18,16 @@ function priceIncreasing(priceID) {
     const tax = (10 * price) / 100;
     taxAmount = taxNumber + tax;
     document.getElementById('tax').innerText = taxAmount.toFixed(2);
-
-    // subtotal and total and tax Increasing
+    // subtotal and total Increasing
     function totalAmount(totalID) {
         const addTotal = document.getElementById(totalID).innerText;
         const totalNumber = parseFloat(addTotal);
-
         // add total price
         if (totalID === 'total') {
             // add
             const addTotalPrice = totalNumber + tax + price;
             document.getElementById(totalID).innerText = addTotalPrice.toFixed(2);
         }
-
         // add subtotal price
         else {
             const addSubTotalPrice = totalNumber + price;
@@ -50,6 +48,7 @@ function priceDecreasing(priceID) {
         price = 59;
     }
     let decreasePrice = 0, taxAmount = 0;
+    // Catch price and upgrade Price status
     const catchPrice = document.getElementById(priceID).innerText;
     const catchPriceNumber = parseFloat(catchPrice);
     decreasePrice = catchPriceNumber - price;
@@ -60,18 +59,16 @@ function priceDecreasing(priceID) {
     const tax = (10 * price) / 100;
     taxAmount = taxNumber - tax;
     document.getElementById('tax').innerText = taxAmount.toFixed(2);
-
+    // decrease subTotalPrice and totalPrice
     function totalAmount(totalID) {
         const catchTotal = document.getElementById(totalID).innerText;
         const totalNumber = parseFloat(catchTotal);
-
         // add total price
         if (totalID === 'total') {
             // add
             const decreaseTotalPrice = totalNumber - tax - price;
             document.getElementById(totalID).innerText = decreaseTotalPrice.toFixed(2);
         }
-
         // add subtotal price
         else {
             const decreaseSubTotalPrice = totalNumber - price;
